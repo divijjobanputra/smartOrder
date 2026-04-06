@@ -21,4 +21,7 @@ public class Order {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public Order() {
+    }
 }

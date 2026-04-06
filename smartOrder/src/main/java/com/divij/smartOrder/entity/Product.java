@@ -20,11 +20,7 @@ public class Product {
     @Column(nullable = false)
     private Double price;
 
-    public Product(Long id, String name, Integer quantity, Double price) {
-        this.id = id;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
+    public Product() {
     }
 
     public void setId(Long id) {
