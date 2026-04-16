@@ -1,29 +1,27 @@
-package com.divij.smartOrder.entity;
+package com.divij.smartOrder.dto;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "orders")
-public class Order {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class OrderResponseDTO {
     private Long id;
     private Long productId;
     private Integer quantity;
     private String status;
-    @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public OrderResponseDTO() {}
+
+    public OrderResponseDTO(Long id, Long productId, Integer quantity, String status, LocalDateTime createdAt) {
+        this.id = id;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
 
     public void setProductId(Long productId) {
         this.productId = productId;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setQuantity(Integer quantity) {
@@ -32,10 +30,6 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     public Long getId() {

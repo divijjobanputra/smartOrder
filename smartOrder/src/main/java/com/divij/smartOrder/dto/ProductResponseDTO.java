@@ -1,35 +1,19 @@
-package com.divij.smartOrder.entity;
+package com.divij.smartOrder.dto;
 
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "products")
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductResponseDTO {
     private Long id;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private Integer quantity;
-
-    @Column(nullable = false)
     private Double price;
 
-    public Product(){}
+    public ProductResponseDTO() {}
 
-    public Product(String name, Integer quantity, Double price) {
+    public ProductResponseDTO(Long id, String name, Integer quantity, Double price) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setQuantity(Integer quantity) {
@@ -38,6 +22,10 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getId() {

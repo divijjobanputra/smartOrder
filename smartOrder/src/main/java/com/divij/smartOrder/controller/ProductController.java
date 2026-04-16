@@ -1,5 +1,7 @@
 package com.divij.smartOrder.controller;
 
+import com.divij.smartOrder.dto.ProductRequestDTO;
+import com.divij.smartOrder.dto.ProductResponseDTO;
 import com.divij.smartOrder.entity.Product;
 import com.divij.smartOrder.service.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +18,12 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product){
-        return productService.createProduct(product);
+    public ProductResponseDTO createProduct(@RequestBody ProductRequestDTO dto){
+        return productService.createProduct(dto);
     }
 
     @GetMapping
-    public List<Product> getAllProducts(){
+    public List<ProductResponseDTO> getAllProducts(){
         return productService.getAllProducts();
     }
 }
