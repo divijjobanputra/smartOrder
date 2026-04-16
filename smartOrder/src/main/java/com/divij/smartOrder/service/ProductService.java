@@ -59,4 +59,29 @@ public class ProductService {
                 product.getPrice()
         );
     }
+
+    public ProductResponseDTO updateProduct(Long id, ProductRequestDTO dto){
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+
+        product.setName(dto.getName());
+        product.setQuantity(dto.getQuantity());
+        product.setPrice(dto.getPrice());
+
+        Product updated = productRepository.save(product);
+
+        return new ProductResponseDTO(
+                updated.getId(),
+                updated.getName(),
+                updated.getQuantity(),
+                updated.getPrice()
+        );
+    }
+
+    public void deleteProduct(Long id){
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+
+        productRepository.deleteById(id);
+    }
 }

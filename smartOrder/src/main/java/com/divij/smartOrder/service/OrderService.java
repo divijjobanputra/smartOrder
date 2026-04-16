@@ -64,4 +64,29 @@ public class OrderService {
                 order.getCreatedAt()
         );
     }
+
+    public OrderResponseDTO updateOrder(Long id, OrderRequestDTO dto){
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: "+id));
+
+        order.setProductId(dto.getProductId());
+        order.setQuantity(dto.getQuantity());
+        order.setStatus(dto.getStatus());
+        Order saved = orderRepository.save(order);
+
+        return new OrderResponseDTO(
+                saved.getId(),
+                saved.getProductId(),
+                saved.getQuantity(),
+                saved.getStatus(),
+                saved.getCreatedAt()
+        );
+    }
+
+    public void deleteOrder(Long id){
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: "+id));
+
+        orderRepository.deleteById(id);
+    }
 }
