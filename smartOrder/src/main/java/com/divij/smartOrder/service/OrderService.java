@@ -3,11 +3,13 @@ package com.divij.smartOrder.service;
 import com.divij.smartOrder.dto.OrderRequestDTO;
 import com.divij.smartOrder.dto.OrderResponseDTO;
 import com.divij.smartOrder.entity.Order;
+import com.divij.smartOrder.exception.ResourceNotFoundException;
 import com.divij.smartOrder.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -47,5 +49,19 @@ public class OrderService {
             ));
         }
         return result;
+    }
+
+    public OrderResponseDTO getOrderById(Long id){
+
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: "+id));
+
+        return new OrderResponseDTO(
+                order.getId(),
+                order.getProductId(),
+                order.getQuantity(),
+                order.getStatus(),
+                order.getCreatedAt()
+        );
     }
 }

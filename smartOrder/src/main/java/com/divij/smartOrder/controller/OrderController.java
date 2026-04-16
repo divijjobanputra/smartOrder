@@ -26,4 +26,9 @@ public class OrderController {
     public List<OrderResponseDTO> getAllOrders(){
         return orderService.getAllOrder();
     }
+
+    @GetMapping("/{id}")
+    public OrderResponseDTO findOrderById(@PathVariable Long id){
+        return orderService.getOrderById(id);
+    }
 }
