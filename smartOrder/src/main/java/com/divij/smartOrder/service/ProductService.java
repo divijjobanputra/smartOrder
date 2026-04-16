@@ -3,6 +3,7 @@ package com.divij.smartOrder.service;
 import com.divij.smartOrder.dto.ProductRequestDTO;
 import com.divij.smartOrder.dto.ProductResponseDTO;
 import com.divij.smartOrder.entity.Product;
+import com.divij.smartOrder.exception.ResourceNotFoundException;
 import com.divij.smartOrder.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +46,17 @@ public class ProductService {
             ));
         }
         return result;
+    }
+
+    public ProductResponseDTO getProductById(Long id){
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+
+        return new ProductResponseDTO(
+                product.getId(),
+                product.getName(),
+                product.getQuantity(),
+                product.getPrice()
+        );
     }
 }
