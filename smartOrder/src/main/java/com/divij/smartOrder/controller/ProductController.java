@@ -4,6 +4,7 @@ import com.divij.smartOrder.dto.ProductRequestDTO;
 import com.divij.smartOrder.dto.ProductResponseDTO;
 import com.divij.smartOrder.entity.Product;
 import com.divij.smartOrder.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +18,9 @@ public class ProductController {
         this.productService = productService;
     }
 
+
     @PostMapping
-    public ProductResponseDTO createProduct(@RequestBody ProductRequestDTO dto){
+    public ProductResponseDTO createProduct(@Valid @RequestBody ProductRequestDTO dto){
         return productService.createProduct(dto);
     }
 
@@ -33,7 +35,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ProductResponseDTO updateProduct(@PathVariable Long id, @RequestBody ProductRequestDTO dto){
+    public ProductResponseDTO updateProduct(@PathVariable Long id,  @Valid @RequestBody ProductRequestDTO dto){
         return productService.updateProduct(id, dto);
     }
 
