@@ -4,6 +4,7 @@ import com.divij.smartOrder.dto.OrderRequestDTO;
 import com.divij.smartOrder.dto.OrderResponseDTO;
 import com.divij.smartOrder.entity.Order;
 import com.divij.smartOrder.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public OrderResponseDTO createOrder(@RequestBody OrderRequestDTO dto){
+    public OrderResponseDTO createOrder(@Valid @RequestBody OrderRequestDTO dto){
         return orderService.createOrder(dto);
     }
 
@@ -33,7 +34,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    public OrderResponseDTO updateOrder(@PathVariable Long id, @RequestBody OrderRequestDTO dto){
+    public OrderResponseDTO updateOrder(@PathVariable Long id, @Valid @RequestBody OrderRequestDTO dto){
         return orderService.updateOrder(id, dto);
     }
 
