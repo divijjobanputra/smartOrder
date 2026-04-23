@@ -1,7 +1,9 @@
 package com.divij.smartOrder.dto;
 
 
-public class ProductResponseDTO {
+import java.io.Serializable;
+
+public class ProductResponseDTO implements Serializable {
     private Long id;
     private String name;
     private Integer quantity;

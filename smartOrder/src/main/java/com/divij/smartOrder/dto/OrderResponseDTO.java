@@ -1,9 +1,10 @@
 package com.divij.smartOrder.dto;
 
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class OrderResponseDTO {
+public class OrderResponseDTO implements Serializable {
     private Long id;
     private Long productId;
     private Integer quantity;

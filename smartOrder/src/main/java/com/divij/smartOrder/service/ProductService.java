@@ -5,6 +5,8 @@ import com.divij.smartOrder.dto.ProductResponseDTO;
 import com.divij.smartOrder.entity.Product;
 import com.divij.smartOrder.exception.ResourceNotFoundException;
 import com.divij.smartOrder.repository.ProductRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    @CacheEvict(value = "products", allEntries = true)
     public ProductResponseDTO createProduct(ProductRequestDTO dto){
         Product product = new Product();
         product.setName(dto.getName());
@@ -34,6 +37,7 @@ public class ProductService {
         );
     }
 
+    @Cacheable("products")
     public List<ProductResponseDTO> getAllProducts(){
         List<Product> products = productRepository.findAll();
         List<ProductResponseDTO> result = new ArrayList<>();
@@ -60,6 +64,7 @@ public class ProductService {
         );
     }
 
+    @CacheEvict(value = "products", allEntries = true)
     public ProductResponseDTO updateProduct(Long id, ProductRequestDTO dto){
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
@@ -78,6 +83,7 @@ public class ProductService {
         );
     }
 
+    @CacheEvict(value = "products", allEntries = true)
     public void deleteProduct(Long id){
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
